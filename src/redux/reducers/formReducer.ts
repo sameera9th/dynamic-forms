@@ -8,7 +8,7 @@ const initialState: InitalState = {
     error: ''
 };
 
-const reducer = (state: InitalState = initialState, action: AnyAction): InitalState => {
+const formReducer = (state: InitalState = initialState, action: AnyAction): InitalState => {
     switch (action.type) {
         case ActionType.FORM + ActionType.FETCHING:
             return {
@@ -32,4 +32,4 @@ const reducer = (state: InitalState = initialState, action: AnyAction): InitalSt
     }
 }
 
-export default reducer
+export default formReducer
