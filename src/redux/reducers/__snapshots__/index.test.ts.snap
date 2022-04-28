@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`root reducer should return the rootReducer 1`] = `
+Object {
+  "formFields": Object {
+    "data": Array [],
+    "error": "",
+    "fetching": false,
+  },
+}
+`;
