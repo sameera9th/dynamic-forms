@@ -5,3 +5,26 @@ export const fields = [
     { "label": "Contact number", "type": "telephone" },
     { "type": "hidden", "value": 1651067294652, "isHidden": true }
 ]
+
+export const fieldsJSON = {
+    "Contact number": {
+        "isValid": false,
+        "value": "",
+    },
+    "Email address": {
+        "isValid": false,
+        "value": "",
+    },
+    "Gender": {
+        "isValid": false,
+        "value": "",
+    },
+    "State": {
+        "isValid": true,
+        "value": "ACT",
+    },
+    "hidden": {
+        "isValid": false,
+        "value": "",
+    }
+}

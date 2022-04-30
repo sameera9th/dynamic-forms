@@ -3,9 +3,11 @@
 exports[`root reducer should return the rootReducer 1`] = `
 Object {
   "formFields": Object {
+    "JSONVisibility": false,
     "data": Array [],
     "error": "",
     "fetching": false,
+    "fieldsJSON": Object {},
   },
 }
 `;

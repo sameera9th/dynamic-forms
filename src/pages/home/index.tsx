@@ -1,14 +1,18 @@
-import React, { useEffect, memo, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import { Grid, Typography, Button, Box, InputLabel, Select, Stack, MenuItem, TextField, Alert, RadioGroup, FormControlLabel, Radio, FormControl, FormLabel } from '@mui/material';
+import React, { useEffect, memo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useStyles } from '../../styles/home.styles';
+import { Grid, Typography, Button, Box, Stack, Alert, CircularProgress } from '@mui/material';
 import { ReduxStateTypes } from '../../redux/reducers/index';
 import { fetchFormFields, hanldeFormFields, handleJSONVisibility } from '../../redux/actions';
 import { ActionType } from '../../redux/types';
 import { Fields } from '../../interfaces/fields';
+import { Dropdown, Input, RadioButton } from '../../components';
+import { lans } from '../../utils/vars'
 
 const Home = memo(() => {
 
     const disptach = useDispatch();
+    const classes = useStyles();
     const {
         data,
         error,
@@ -21,93 +25,106 @@ const Home = memo(() => {
         disptach(fetchFormFields());
     }, []);
 
-    const renderFormElements = (elements: Fields[]) => {
+    const renderInputField = (item: Fields, key: string | number) => {
+        return (
+            <Box mb={2}>
+                <Input
+                    variant='outlined'
+                    error={!fieldsJSON[item.label as string].isValid}
+                    key={key}
+                    required={!item.isOptional}
+                    label={item.label}
+                    defaultValue={item.default}
+                    hidden={item.isHidden}
+                    type={item.type}
+                    value={fieldsJSON[item.label as string].value}
+                    onChange={(e) => {
+                        disptach(hanldeFormFields({
+                            type: item.type === 'email' ? ActionType.HANDLE_EMAIL : ActionType.HANDLE_TELEPHONE,
+                            label: item.label!,
+                            value: e.target.value
+                        }));
+                    }}
+                />
+            </Box>
+        )
+    }
 
+    const renderRadioField = (item: Fields, key: string | number) => {
+        return (
+            <Box mb={2}>
+                <RadioButton
+                    key={key}
+                    label={item.label}
+                    defaultValue={item.default}
+                    onChange={(e) => {
+                        disptach(hanldeFormFields({
+                            type: ActionType.HANDLE_RADIO,
+                            label: item.label!,
+                            value: e.target.value
+                        }));
+                    }}
+                    items={item.value && Array.isArray(item.value) ? item.value : []}
+                />
+            </Box>
+        )
+    }
+
+    const renderDropdownField = (item: Fields, key: string | number) => {
+        return (
+            <Box mb={2} >
+                <Dropdown
+                    key={key}
+                    label={item.label || item.default}
+                    value={fieldsJSON[item.label as string].value}
+                    onChange={(e) => {
+                        disptach(hanldeFormFields({
+                            type: ActionType.HANDLE_SELECT,
+                            label: item.label!,
+                            value: e.target.value as string
+                        }));
+                    }}
+                    items={item.value && Array.isArray(item.value) ? item.value : []}
+                />
+            </Box>
+        )
+    }
+
+    const renderFormElements = (elements: Fields[]) => {
         return elements.map((item: Fields, index) => {
-            if (item.type === 'email' || item.type === 'telephone') {
-                return (
-                    <Box mb={2}>
-                        <TextField
-                            error={!fieldsJSON[item.label as string].isValid}
-                            key={index}
-                            required={!item.isOptional}
-                            label={item.label}
-                            defaultValue={item.default}
-                            hidden={item.isHidden}
-                            type={item.type}
-                            value={fieldsJSON[item.label as string].value}
-                            onChange={(e) => {
-                                disptach(hanldeFormFields({
-                                    type: item.type === 'email' ? ActionType.HANDLE_EMAIL : ActionType.HANDLE_TELEPHONE,
-                                    label: item.label!,
-                                    value: e.target.value
-                                }));
-                            }}
-                        />
-                    </Box>
-                )
-            } else if (item.type === 'radio') {
-                return (
-                    <Box mb={2}>
-                        <FormControl key={index}>
-                            <FormLabel id="demo-radio-buttons-group-label">{item.label}</FormLabel>
-                            <RadioGroup
-                                aria-labelledby="demo-radio-buttons-group-label"
-                                defaultValue={item.default}
-                                name="radio-buttons-group"
-                                onChange={(e) => {
-                                    disptach(hanldeFormFields({
-                                        type: ActionType.HANDLE_RADIO,
-                                        label: item.label!,
-                                        value: e.target.value
-                                    }));
-                                }}
-                            >
-                                {item.value && Array.isArray(item.value) && item.value.map((item) => (
-                                    <FormControlLabel key={item} value={item} control={<Radio />} label={item} />
-                                ))}
-                            </RadioGroup>
-                        </FormControl>
-                    </Box>
-                )
-            } else if (item.type === 'select') {
-                return (
-                    <Box mb={2} >
-                        <FormControl variant="standard" key={index}>
-                            <InputLabel id="demo-simple-select-label">{item.label}</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={fieldsJSON[item.label as string].value}
-                                label={fieldsJSON[item.label as string].value || item.default}
-                                onChange={(e) => {
-                                    disptach(hanldeFormFields({
-                                        type: ActionType.HANDLE_SELECT,
-                                        label: item.label!,
-                                        value: e.target.value
-                                    }));
-                                }}
-                            >
-                                {
-                                    item.value && Array.isArray(item.value) && item.value.map((item) => (
-                                        <MenuItem key={item} value={item}>{item}</MenuItem>
-                                    ))
-                                }
-                            </Select>
-                        </FormControl>
-                    </Box>
-                )
+            switch (item.type) {
+                case "email":
+                case "telephone":
+                    return renderInputField(item, index);
+                case "radio":
+                    return renderRadioField(item, index);
+                case "select":
+                    return renderDropdownField(item, index);
+                default:
+                    return (<></>)
             }
         })
     }
 
+    const loader = () => {
+        return (
+            <Box className={classes.loader}>
+                <CircularProgress />
+                <Typography>
+                    {lans.loading}
+                </Typography>
+            </Box>
+        )
+    }
+
     return (
         <React.Fragment>
-            {error && <Box my={4}><Alert severity="error">{error}</Alert></Box>}
-            <Grid container>
+            {fetching && loader()}
+            {!fetching && error && <Box my={4}><Alert severity="error">{error}</Alert></Box>}
+            {!fetching && !error && <Grid container>
                 <Grid item md={6}>
                     <Typography variant="h5" component="h5" align='center'>
-                        Form Fields
+                        {lans.section_title1}
                     </Typography>
                     <Stack
                         component="form"
@@ -122,12 +139,12 @@ const Home = memo(() => {
                             onClick={() => {
                                 disptach(handleJSONVisibility(!JSONVisibility));
                             }}
-                        >Submit</Button>
+                        >{lans.submit_btn_text} ({`${JSONVisibility? "Hide" : "Show"}`})</Button>
                     </Stack>
                 </Grid>
                 <Grid item md={6}>
                     <Typography variant="h5" component="h5" align='center'>
-                        JSON Output
+                        {lans.section_title2}
                     </Typography>
                     {JSONVisibility && <Box ml={10} mt={2}>
                         <pre id="json">
@@ -135,7 +152,7 @@ const Home = memo(() => {
                         </pre>
                     </Box>}
                 </Grid>
-            </Grid>
+            </Grid>}
 
         </React.Fragment>
     );
