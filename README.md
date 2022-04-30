@@ -1,6 +1,7 @@
 # Dynamic Form (React with Redux)
 
-This project is written as a Client-Side Rendering and based on React and Redux(Thunk) frontend libraries with Typescript. The project has been implemented using [Create-React-App typescript](https://create-react-app.dev/docs/adding-typescript/) boilerplate. Further, [React test library](https://testing-library.com/docs/react-testing-library/intro/) with Jest is being used for the TDDs, and [Material-UI] (https://mui.com/) is also being used as the stylings.
+This project is written as a Client-Side Rendering application and based on React and Redux(Thunk) frontend libraries with Typescript. The project has been implemented using [Create-React-App typescript](https://create-react-app.dev/docs/adding-typescript/) boilerplate. Further, [React test library](https://testing-library.com/docs/react-testing-library/intro/) with Jest is being used for the TDDs, and [Material-UI](https://mui.com/) is also being used for the stylings.
+
 
 ![](https://github.com/sameera9th/dynamic-forms/blob/main/readme-assets/demo.gif?raw=true)
 ## Requisites
@@ -43,5 +44,5 @@ This is not an exhaustive list, just some worth noting
 
 Move to `/dynamic-forms`, and you need to intall dependencies using `npm install` or `yarn install` then you can run the tests using `npm run test`. Please note that all the tests are there with the respective ts/tsx files with `file.test.ts or file.test.tsx`.
 
-### Run Coverage
+### Test Coverage
 ![](https://github.com/sameera9th/dynamic-forms/blob/main/readme-assets/test-coverage.png?raw=true)
