@@ -1,6 +1,7 @@
 import { ActionType } from "../types"
 import { AnyAction } from 'redux';
 import { InitalState, Fields } from '../../interfaces/fields';
+import { validateEmail, validatePhoneNumber } from '../../utils/validations';
 
 const initialState: InitalState = {
     fetching: false,
@@ -9,21 +10,6 @@ const initialState: InitalState = {
     fieldsJSON: {},
     JSONVisibility: false
 };
-
-const validateEmail = (mail: string) => {
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
-        return true;
-    }
-    return false;
-}
-
-const validatePhoneNumber = (phone: string) => {
-    const phoneno = /^\d{10}$/;
-    if (phone.match(phoneno)) {
-        return true
-    }
-    return false;
-}
 
 
 const formReducer = (state: InitalState = initialState, action: AnyAction): InitalState => {

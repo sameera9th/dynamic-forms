@@ -23,6 +23,7 @@ const Home = memo(() => {
 
     useEffect(() => {
         disptach(fetchFormFields());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const renderInputField = (item: Fields, key: string | number) => {
@@ -142,7 +143,7 @@ const Home = memo(() => {
                             onClick={() => {
                                 disptach(handleJSONVisibility(!JSONVisibility));
                             }}
-                        >{lans.submit_btn_text} ({`${JSONVisibility? "Hide JSON" : "Show JSON"}`})</Button>
+                        >{lans.submit_btn_text} ({`${JSONVisibility ? "Hide JSON" : "Show JSON"}`})</Button>
                     </Stack>
                 </Grid>
                 <Grid item md={6} className={classes.gridFrameRight}>

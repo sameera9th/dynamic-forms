@@ -1,6 +1,8 @@
 import urlPath from "./end-points";
 
-export default {
+const URLS = {
     baseURL: 'https://ansible-template-engine.herokuapp.com',
     ...urlPath
 }
+
+export default URLS;
