@@ -30,6 +30,7 @@ const Home = memo(() => {
             <Box mb={2}>
                 <Input
                     variant='outlined'
+                    size="small"
                     error={!fieldsJSON[item.label as string].isValid}
                     key={key}
                     required={!item.isOptional}
@@ -55,6 +56,7 @@ const Home = memo(() => {
             <Box mb={2}>
                 <RadioButton
                     key={key}
+                    size="small"
                     label={item.label}
                     defaultValue={item.default}
                     onChange={(e) => {
@@ -72,8 +74,9 @@ const Home = memo(() => {
 
     const renderDropdownField = (item: Fields, key: string | number) => {
         return (
-            <Box mb={2} >
+            <Box mb={2}>
                 <Dropdown
+                    size="small"
                     key={key}
                     label={item.label || item.default}
                     value={fieldsJSON[item.label as string].value}
@@ -122,7 +125,7 @@ const Home = memo(() => {
             {fetching && loader()}
             {!fetching && error && <Box my={4}><Alert severity="error">{error}</Alert></Box>}
             {!fetching && !error && <Grid container>
-                <Grid item md={6}>
+                <Grid item md={6} className={classes.gridFrameLeft}>
                     <Typography variant="h5" component="h5" align='center'>
                         {lans.section_title1}
                     </Typography>
@@ -139,10 +142,10 @@ const Home = memo(() => {
                             onClick={() => {
                                 disptach(handleJSONVisibility(!JSONVisibility));
                             }}
-                        >{lans.submit_btn_text} ({`${JSONVisibility? "Hide" : "Show"}`})</Button>
+                        >{lans.submit_btn_text} ({`${JSONVisibility? "Hide JSON" : "Show JSON"}`})</Button>
                     </Stack>
                 </Grid>
-                <Grid item md={6}>
+                <Grid item md={6} className={classes.gridFrameRight}>
                     <Typography variant="h5" component="h5" align='center'>
                         {lans.section_title2}
                     </Typography>

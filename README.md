@@ -1,46 +1,43 @@
-# Getting Started with Create React App
+# Dynamic Form (React with Redux)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is written as a CSR (Client Side Rendering) based on React and Redux frontend libraries with typescript. The project has been implemented using [Create-React-App typescript](https://create-react-app.dev/docs/adding-typescript/) boilerplate. Further, [React test library](https://testing-library.com/docs/react-testing-library/intro/) with jest is being used for the TDDs and [Material-UI] (https://mui.com/) is also being used as the stylings.
 
-## Available Scripts
+![](https://github.com/sameera9th/dynamic-forms/blob/main/readme-assets/demo.gif?raw=true)
+## Requisites
+* [Docker](https://docs.docker.com/)
+* npm >= 8.5.0 or Yarn >= 1.22.10
+* NodeJS >= v16.14.2
 
-In the project directory, you can run:
+## Quick Reference
+* React Dev Server (frontend) -- You can find the React application from here (`dynamic-forms/src`)
+    * http://localhost:3000*
+## File Structure
+This is not an exhaustive list, just some worth noting
 
-### `yarn start`
++-- /dynamic-forms                  : React application
+|   +-- /public                     : React public assets
+|   +-- /src                        : React app source
+|       +-- /__mock__               : Mock data
+|       +-- /components             : UI components
+|       +-- /interfaces             : Interfaces realted to form fields
+|       +-- /pages                  : Pages (Container components)
+|       +-- /redux                  : Redux files
+|           +-- /actions            : Action files
+|           +-- /reducers           : Reducer files
+|           +-- /types              : Action types
+|           +-- /store.ts           : Redux store configuration file
+|       +-- /services               : API calls with endpoints
+|       +-- /utils                  : Utility methods and helpers
+|       +-- /App.tsx                : App file [source code]
+|       +-- /index.tsx              : App initiate file
+|       +-- /jest.config.js         : Jest tests setup
+|   +-- /package.json               : App dependencies
+|   +-- /tsconfig.json              : Typescript configurations
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Starting React Application
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+> **First** - move to `/dynamic-forms`, first you need to intall dependencies using `npm install` or `yarn install` then you can start the dev server using `npm start` or `yarn start`. The defaul port for the react application is 3000, you can check if the application started successfully visiting `http://localhost:3000`
 
-### `yarn test`
+### Run tests
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Move to `/dynamic-forms`, first you need to intall dependencies using `npm install` or `yarn install` then you can run the tests using `npm run test`. Please note that all the tests are there with the respective ts/tsx files with `file.test.ts or file.test.tsx`.
