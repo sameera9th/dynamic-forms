@@ -5,7 +5,8 @@ import { getRoute } from '../../utils/helpers';
 
 class FormFieldService {
     getFormFields() {
-        return axios.get<Fields[]>(getRoute(config.getFormFields));
+        // This was added to handle CORS issues.
+        return axios.get<Fields[]>(`https://cors-anywhere.herokuapp.com/${getRoute(config.getFormFields)}`);
     }
 }
 

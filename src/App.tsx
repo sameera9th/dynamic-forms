@@ -1,34 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { Provider } from 'react-redux';
-import store from './redux/store';
+import { Container, Typography, Box, Grid } from '@mui/material';
+import Home from './pages/home';
 
-function App() {
+const App = () => {
+
+  console.log('app is calling');
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container maxWidth="md">
+      <Box sx={{ my: 4 }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Dynamic Form
+        </Typography>
+        <Home />
+      </Box>
+    </Container>
   );
 }
 
-const AppWarpper = () => (
-  <Provider store={store}>
-    <App />
-  </Provider>
-)
-
-export default AppWarpper;
+export default App;

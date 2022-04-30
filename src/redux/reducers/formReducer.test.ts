@@ -6,18 +6,20 @@ describe('form reducer', () => {
     const getInitialState = () => ({
         fetching: false,
         data: [],
-        error: ''
+        error: '',
+        fieldsJSON: {},
+        JSONVisibility: false
     });
 
     describe('FORM_FETCHING', () => {
         it('fetching should be true', () => {
-            const basketData = getInitialState();
-            const state = formReducer(basketData, {
+            const formData = getInitialState();
+            const state = formReducer(formData, {
                 type: ActionType.FORM + ActionType.FETCHING,
                 payload: null,
             });
             expect(state).toEqual({
-                ...basketData,
+                ...formData,
                 fetching: true,
             });
         });
@@ -25,13 +27,13 @@ describe('form reducer', () => {
 
     describe('FORM_SUCCESS', () => {
         it('data should be have values and fetching should be false', () => {
-            const basketData = getInitialState();
-            const state = formReducer(basketData, {
+            const formData = getInitialState();
+            const state = formReducer(formData, {
                 type: ActionType.FORM + ActionType.SUCCESS,
                 payload: fields,
             });
             expect(state).toEqual({
-                ...basketData,
+                ...formData,
                 data: fields,
                 fetching: false
             });
@@ -40,14 +42,14 @@ describe('form reducer', () => {
 
     describe('FORM_ERROR', () => {
         it('error should have a value and fetching should be false', () => {
-            const basketData = getInitialState();
+            const formData = getInitialState();
             const errorMsg = 'An error occurred while fetching the fields';
-            const state = formReducer(basketData, {
+            const state = formReducer(formData, {
                 type: ActionType.FORM + ActionType.ERROR,
                 error: errorMsg,
             });
             expect(state).toEqual({
-                ...basketData,
+                ...formData,
                 error: errorMsg,
                 fetching: false
             });
